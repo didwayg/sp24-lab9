@@ -1,48 +1,49 @@
 # [save]
 class SaveObjects:
-    def __init__(self, writer):
-        self.writer = writer
+    def __init__(self):
+        pass
 
-    def save(self, thing):
+    def save(self, thing, writer):
         typename = type(thing).__name__
-        method = f"save_{typename}"
+        method = f"save_{typename})"
         assert hasattr(self, method), \
             f"Unknown object type {typename}"
-        getattr(self, method)(thing)
+
+        getattr(self, method)(writer, thing)
 # [/save]
 
-    def _write(self, *fields):
-        print(":".join(str(f) for f in fields), file=self.writer)
+    def _write(self, writer, *fields):
+        print(":".join(str(f) for f in fields), file=writer)
 
-    def save_bool(self, thing):
-        self._write("bool", thing)
+    def save_bool(self, writer, thing):
+        self._write("bool",  writer, thing)
 
-    def save_float(self, thing):
-        self._write("float", thing)
+    def save_float(self, writer, thing):
+        self._write("float", writer,  thing)
 
     # [save_examples]
-    def save_int(self, thing):
-        self._write("int", thing)
+    def save_int(self, writer, thing):
+        self._write("int", writer,  thing)
 
-    def save_str(self, thing):
+    def save_str(self, writer, thing):
         lines = thing.split("\n")
-        self._write("str", len(lines))
+        self._write("str", writer,  len(lines))
         for line in lines:
-            print(line, file=self.writer)
+            print(line, file=writer)
     # [/save_examples]
 
-    def save_list(self, thing):
-        self._write("list", len(thing))
+    def save_list(self, writer, thing):
+        self._write("list", writer, len(thing))
         for item in thing:
             self.save(item)
 
-    def save_set(self, thing):
-        self._write("set", len(thing))
+    def save_set(self, writer, thing):
+        self._write("set", writer, len(thing))
         for item in thing:
             self.save(item)
 
-    def save_dict(self, thing):
-        self._write("dict", len(thing))
+    def save_dict(self, writer, thing):
+        self._write("dict", writer, len(thing))
         for (key, value) in thing.items():
             self.save(key)
             self.save(value)
@@ -50,11 +51,11 @@ class SaveObjects:
 
 # [load]
 class LoadObjects:
-    def __init__(self, reader):
-        self.reader = reader
+    def __init__(self):
+        pass
 
-    def load(self):
-        line = self.reader.readline()[:-1]
+    def load(self, reader):
+        line = reader.readline()[:-1]
         assert line, "Nothing to read"
         fields = line.split(":", maxsplit=1)
         assert len(fields) == 2, f"Badly-formed line {line}"

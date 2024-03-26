@@ -7,12 +7,12 @@ Organization:
 * SDX-ch16: The code files for the _SDX Ch. 16_ activity (as downloaded directly from the book website, unmodified) 
 
 ## Team Members for Part 1
-Enter your names here
+Neel Troeger & Grant Didway
 
 ## Team Roles for Part 1
 Who will start out as
-* DRIVER: Driver's name
-* NAVIGATOR: Navigator's name
+* DRIVER: Neel
+* NAVIGATOR: Grant
 
 You will switch halfway through this activity.
 
@@ -21,6 +21,14 @@ You will switch halfway through this activity.
 Write your answers to the questions below.
 
 * What were the main ideas from SDX chapter 16?
+
+- How to create an object persistence framework from scratch
+
+- How object persistence handles aliasing and circularity
+
+-The open close principle: software should be extendible rather than modifiable
+
+
 * What questions did you have about the material in the chapters? What did you find confusing?
 
 ### Exercise 0: Running the tests
